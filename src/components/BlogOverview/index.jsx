@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import loading from "../../assets/loading.json";
 import YoutubeFresh from "../Loaders/YoutubeFresh";
+import he from "he";
 
-const BlogOverview = ({data, notFound}) => {
-  
+const BlogOverview = ({ data, notFound }) => {
   if (notFound) {
     return (
       <div className="min-h-[200px]">
@@ -61,7 +60,9 @@ const BlogOverview = ({data, notFound}) => {
                       {item.title}
                     </h5>
                     <p className="text-foreground mb-2 text-xs overflow-hidden">
-                      {item.content.replace(/<[^>]+>/g, '').slice(0, 100) + " ..."}
+                      {he.decode(
+                        item.content.replace(/<[^>]+>/g, "").slice(0, 110)
+                      ) + " ..."}
                     </p>
                   </div>
                 </div>
