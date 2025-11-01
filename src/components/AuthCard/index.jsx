@@ -13,9 +13,17 @@ import { Label } from "@/components/ui/label";
 import logo from "../../assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
-export function AuthCard() {
+export function AuthCard({
+  loading,
+  setEmail,
+  setPassword,
+  handleLogin,
+  setUsername,
+  handleRegister,
+}) {
   const location = useLocation();
   const path = location.pathname;
+
   return (
     <Card className="w-full max-w-sm p-8">
       <div className="flex justify-center">
@@ -23,11 +31,12 @@ export function AuthCard() {
       </div>
       <div className="flex flex-col items-center justify-center gap-4">
         <Input
-          className="outline-0 border-0 focus-visible:border shadow-xs"
+          className={`outline-0 border-0 focus-visible:border shadow-xs`}
           id="email"
           type="email"
-          placeholder="Enter your username"
+          placeholder="Enter your email"
           required
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           className={`outline-0 border-0 focus-visible:border shadow-xs ${
@@ -35,8 +44,9 @@ export function AuthCard() {
           }`}
           id="username"
           type="text"
-          placeholder="Enter your email"
+          placeholder="Enter your username"
           required
+          onChange={(e) => setUsername(e.target.value)}
         />
         <Input
           className="outline-0 border-0 focus-visible:border shadow-xs"
@@ -44,19 +54,31 @@ export function AuthCard() {
           type="password"
           required
           placeholder="Enter your password"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        {path === "/sign-up" ? (
-          <Button className="w-full" type="submit">
-            Sign In
+        {path === "/login" ? (
+          <Button 
+            disabled={loading}
+            onClick={() => handleLogin()}
+            className="w-full"
+            type="submit"
+          >
+            {loading === true ? "Signing in..." : "Sign in"}
           </Button>
         ) : (
-          <Button className="w-full" type="submit">
-            Sign Up
+          <Button
+            disabled={loading}
+
+            onClick={() => handleRegister()}
+            className="w-full"
+            type="submit"
+          >
+            {loading === true ? "Signing up..." : "Sign up"}
           </Button>
         )}
         <div variant="outline" className="mt-4 text-center">
-          {path === "/sign-up" ? (
+          {path === "/login" ? (
             <span className="text-sm text-gray-500">
               Don't have an account?
               <Link className="text-primary" to="/sign-up">

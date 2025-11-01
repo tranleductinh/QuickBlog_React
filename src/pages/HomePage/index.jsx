@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import BlogOverview from "@/components/BlogOverview";
-import api from "@/services/api";
+import {getBlogs}  from "@/services/api/blog";
 
 const HomePage = () => {
   const [data, getData] = useState([]);
@@ -14,7 +14,7 @@ const HomePage = () => {
     const fetch = async () => {
       try {
         setNotFound(false);
-        const response = await api.get("/posts");
+        const response = await getBlogs();
         console.log(response);
         getData(response.data.items);
         getDataFilter(response.data.items);

@@ -1,10 +1,13 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
+import DropMenu from "../DropMenu";
+import AuthContext from "../contexts/authContext";
 const Header = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
+  const { role } = useContext(AuthContext);
+  console.log("role", role)
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -86,23 +89,7 @@ const Header = () => {
                 </svg>
               )}
             </Button>
-            <Button className={`bg-background hover:bg-accent border border-input ${theme === "dark" ? "bg-input/30 hover:bg-accent/50" : ""}`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="lucide lucide-user text-foreground"
-              >
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </Button>
+            <DropMenu  theme={theme} role={role}/>
           </div>
         </div>
       </div>

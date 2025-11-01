@@ -1,7 +1,8 @@
-import BlogDetail from '@/components/BlogDetail'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import BlogDetail from "@/components/BlogDetail";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import api from "@/services/api";
+import { getDetails } from "@/services/api/blog";
 
 const BlogViewPage = () => {
   const { id } = useParams();
@@ -9,21 +10,21 @@ const BlogViewPage = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await api.get(`/posts/${id}`);
-        console.log(response)
+        const response = await getDetails(id);
+        console.log(response);
         setBlog(response);
       } catch (error) {
         console.error(error);
       }
-    }
+    };
     fetch();
   }, []);
-  console.log("blog", blog)
+  console.log("blog", blog);
   return (
     <div>
-      <BlogDetail blog={blog}/>
+      <BlogDetail blog={blog} />
     </div>
-  )
-}
+  );
+};
 
-export default BlogViewPage
+export default BlogViewPage;

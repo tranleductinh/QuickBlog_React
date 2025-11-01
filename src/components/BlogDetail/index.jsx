@@ -1,10 +1,10 @@
 import React from "react";
 
 const BlogDetail = ({ blog }) => {
-  console.log("status", blog.status);
+  console.log("status", blog);
   return (
     <div>
-      {blog.status === 200 ? (
+      {blog.data ? (
         <div>
           <div className="text-center">
             <p className="text-primary font-medium">
