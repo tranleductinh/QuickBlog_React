@@ -3,7 +3,7 @@ import AnimatedWave from "../../components/lightswind/animated-wave";
 import AuthCard from "../../components/AuthCard";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "@/components/contexts/authContext";
+import AuthContext from "@/contexts/authContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");

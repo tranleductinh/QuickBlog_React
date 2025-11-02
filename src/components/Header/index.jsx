@@ -3,11 +3,11 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import DropMenu from "../DropMenu";
-import AuthContext from "../contexts/authContext";
+import AuthContext from "../../contexts/authContext";
 const Header = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const { role } = useContext(AuthContext);
-  console.log("role", role)
+  console.log("role", role);
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -46,7 +46,9 @@ const Header = () => {
             </Button>
             <Button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className={`bg-[#0000] hover:bg-accent ${theme === "dark" && "hover:bg-accent/50"}`}
+              className={`bg-[#0000] hover:bg-accent ${
+                theme === "dark" && "hover:bg-accent/50"
+              }`}
             >
               {theme === "dark" ? (
                 <svg
@@ -89,7 +91,7 @@ const Header = () => {
                 </svg>
               )}
             </Button>
-            <DropMenu  theme={theme} role={role}/>
+            <DropMenu theme={theme} role={role} />
           </div>
         </div>
       </div>
