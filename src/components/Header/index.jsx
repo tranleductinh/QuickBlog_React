@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import DropMenu from "../DropMenu";
 import AuthContext from "../../contexts/authContext";
 const Header = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const { role } = useContext(AuthContext);
+  const { role, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   console.log("role", role);
   useEffect(() => {
     if (theme === "dark") {
@@ -17,6 +18,10 @@ const Header = () => {
       localStorage.setItem("theme", "light");
     }
   }, [theme]);
+  const handleLogout = () => {
+    logOut();
+    navigate("/login");
+  };
   return (
     <>
       <div className="xl:container py-4 mx-auto fixed top-0 left-0 right-0 z-50 bg-background">
@@ -91,7 +96,7 @@ const Header = () => {
                 </svg>
               )}
             </Button>
-            <DropMenu theme={theme} role={role} />
+            <DropMenu theme={theme} role={role} handleLogout={handleLogout} />
           </div>
         </div>
       </div>

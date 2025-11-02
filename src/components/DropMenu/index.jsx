@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 
-export function DropMenu({ theme, role }) {
+export function DropMenu({ theme, role, handleLogout }) {
   return (
     <DropdownMenu
       className={`bg-background hover:bg-accent border border-input ${
@@ -96,7 +96,10 @@ export function DropMenu({ theme, role }) {
               </svg>
               User Management
             </Link>
-            <div className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded p-1.5">
+            <div
+              onClick={() => handleLogout()}
+              className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded p-1.5"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

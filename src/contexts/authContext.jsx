@@ -7,8 +7,10 @@ export const AuthContextProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(
     JSON.parse(localStorage.getItem("userInfo")) || null
   );
-  const [role, setRole] = useState(JSON.parse(localStorage.getItem("userInfo"))?.user?.role || "");
-  console.log("userInfo",userInfo)
+  const [role, setRole] = useState(
+    JSON.parse(localStorage.getItem("userInfo"))?.user?.role || ""
+  );
+  console.log("userInfo", userInfo);
   const loginUser = async (payload) => {
     try {
       const res = await login(payload);
@@ -48,10 +50,18 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const logOut = () => {
+    localStorage.removeItem("userInfo");
+    setUserInfo(null);
+    toast.success("Đăng xuất thành công");
+  };
+
   console.log(userInfo);
 
   return (
-    <AuthContext.Provider value={{ userInfo, loginUser, signUpUser, role }}>
+    <AuthContext.Provider
+      value={{ userInfo, loginUser, signUpUser, role, logOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
