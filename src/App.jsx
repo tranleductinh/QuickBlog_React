@@ -35,14 +35,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="/create-blog"
-                element={
-                  <ProtectedRoute role="user">
-                    <CreateBlogPage />{" "}
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/create-blog" element={<CreateBlogPage />} />
             </Route>
           </Routes>
         </AuthContextProvider>
