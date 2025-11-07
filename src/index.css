@@ -13,7 +13,7 @@ h1, h2, h3, h4, h5 {
   margin: revert;
 }
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
+ --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);

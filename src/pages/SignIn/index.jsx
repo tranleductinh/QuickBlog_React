@@ -9,16 +9,13 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext);
   const handleLogin = async () => {
     try {
       setLoading(true);
       const response = await loginUser({ email, password });
       console.log(response);
-      toast.success("Đăng nhập thành công");
-      navigate("/");
+      
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.message);

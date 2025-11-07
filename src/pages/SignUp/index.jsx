@@ -11,14 +11,13 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const { signUpUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+
   const handleRegister = async () => {
     try {
       setLoading(true);
       const response = await signUpUser(email, username, password);
       console.log(response);
-      toast.success("Đăng ký thành công");
-      navigate("/");
+      
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.message);

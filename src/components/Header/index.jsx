@@ -30,25 +30,27 @@ const Header = () => {
             <img className="max-w-12 cursor-pointer" src={logo} alt="" />
           </Link>
           <div className="flex justify-end items-center gap-2">
-            <Button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-plus text-white"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14"></path>
-                <path d="M12 5v14"></path>
-              </svg>
-              Create Blog
-            </Button>
+            <Link to="create-blog">
+              <Button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-plus text-white"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
+                Create Blog
+              </Button>
+            </Link>
             <Button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className={`bg-[#0000] hover:bg-accent ${

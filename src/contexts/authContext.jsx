@@ -1,12 +1,14 @@
 import { getMe, login, register } from "@/services/api/user";
 import { createContext, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(
     JSON.parse(localStorage.getItem("userInfo")) || null
   );
+  const navigate = useNavigate();
   const [role, setRole] = useState(
     JSON.parse(localStorage.getItem("userInfo"))?.user?.role || ""
   );
@@ -14,7 +16,6 @@ export const AuthContextProvider = ({ children }) => {
   const loginUser = async (payload) => {
     try {
       const res = await login(payload);
-
       if (res.status === 200) {
         localStorage.setItem("userInfo", JSON.stringify(res.data));
         try {
@@ -28,6 +29,8 @@ export const AuthContextProvider = ({ children }) => {
               JSON.stringify({ ...res.data, ...me.data })
             );
           }
+          toast.success("Đăng nhập thành công");
+          navigate("/");
         } catch (error) {
           console.error(error);
           toast.error(error.response?.data?.message || "Not me");
@@ -42,8 +45,10 @@ export const AuthContextProvider = ({ children }) => {
   const signUpUser = async (email, username, password) => {
     try {
       const res = await register({ email, username, password });
-      loginUser({ email, password });
+      localStorage.setItem("userInfo", JSON.stringify(res.data));
       console.log("res", res);
+      toast.success("Đăng ký thành công");
+      navigate("/");
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Đăng ký thất bại");

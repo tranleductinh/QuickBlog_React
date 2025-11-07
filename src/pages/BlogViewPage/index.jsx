@@ -1,7 +1,6 @@
 import BlogDetail from "@/components/BlogDetail";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "@/services/api";
 import { getDetails } from "@/services/api/blog";
 
 const BlogViewPage = () => {
