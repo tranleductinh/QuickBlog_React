@@ -18,6 +18,7 @@ const CreateBlogPage = () => {
       id: Date.now(),
       name: tagValue,
     };
+    if (newTag.name == "") return;
     setTags([newTag, ...tags]);
     setTagValue("");
   };
@@ -34,11 +35,14 @@ const CreateBlogPage = () => {
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
   const handleCreateBlog = async () => {
     setLoading(true);
+    if(!blogTitle || !blogContent || !file) {
+      setLoading(false);
+      return toast.error("Vui lọc nhập đầy đủ thông tin");
+    }
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", uploadPreset);
     formData.append("cloud_name", cloudName);
-
     try {
       const res = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
@@ -57,16 +61,16 @@ const CreateBlogPage = () => {
             content: blogContent,
             tags: tags.map((tag) => tag.name),
           };
-          console.log("newBlog", newBlog)
+          console.log("newBlog", newBlog);
           const response = await createBlog(newBlog);
           console.log("response", response);
           console.log("blog", newBlog);
+          toast.success("Tạo blog thành công");
+          navigate("/");
         } catch (error) {
           console.log(error);
         }
       }
-      toast.success("Tạo blog thành công");
-      navigate("/");
     } catch (error) {
       console.log(error);
     } finally {

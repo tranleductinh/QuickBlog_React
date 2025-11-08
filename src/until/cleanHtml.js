@@ -1,0 +1,1 @@
+export const cleanHtml = (html) => html.replace(/<[^>]*>/g, "");

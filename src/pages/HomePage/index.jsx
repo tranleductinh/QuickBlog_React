@@ -3,45 +3,47 @@ import { Input } from "@/components/ui/input";
 import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import BlogOverview from "@/components/BlogOverview";
-import {getBlogs}  from "@/services/api/blog";
+import { getBlogs } from "@/services/api/blog";
 
 const HomePage = () => {
-  const [data, getData] = useState([]);
-  const [dataFilter, getDataFilter] = useState([]);
+  const [data, setData] = useState([]);
+  const [dataFilter, setDataFilter] = useState([]);
   const [search, setSearch] = useState(null);
   const [notFound, setNotFound] = useState(false);
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        setNotFound(false);
-        const response = await getBlogs();
-        console.log(response);
-        getData(response.data.items);
-        getDataFilter(response.data.items);
-      } catch (error) {
-        setNotFound(true);
-        console.error(error);
-      }
-    };
     fetch();
   }, []);
+  const fetch = async () => {
+    try {
+      setNotFound(false);
+      const response = await getBlogs();
+      console.log(response);
+      setData(response.data.items);
+      setDataFilter(response.data.items);
+    } catch (error) {
+      setNotFound(true);
+      console.error(error?.response?.data?.message);
+    }
+  };
   console.log("search", search);
   const handleSearch = () => {
     setNotFound(false);
     if (search !== null) {
-      const newData = data.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
-      if(newData.length === 0) {
-        setNotFound(true)
-        return
+      const newData = data.filter((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+      );
+      if (newData.length === 0) {
+        setNotFound(true);
+        return;
       }
-      getDataFilter(
+      setDataFilter(
         data.filter((item) =>
           item.title.toLowerCase().includes(search.toLowerCase())
         )
       );
     } else {
-      setNotFound(false)
-      getDataFilter(data);
+      setNotFound(false);
+      setDataFilter(data);
     }
   };
   console.log("data", data);

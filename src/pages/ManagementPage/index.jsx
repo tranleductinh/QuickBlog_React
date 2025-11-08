@@ -54,27 +54,31 @@ const ManagementPage = () => {
       await setRole(id, editRole);
       toast.success("Set role thành công");
       setOpenRole(false);
-      setUser(user.map((item) => (item._id === id ? { ...item, role: editRole } : item)));
+      setUser(
+        user.map((item) =>
+          item._id === id ? { ...item, role: editRole } : item
+        )
+      );
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        setLoading(true);
-        const response = await getUser();
-        console.log("response", response.data.items);
-        setUser(response.data.items);
-        console.log("object, re", response.data.items);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetch();
   }, []);
+  const fetch = async () => {
+    try {
+      setLoading(true);
+      const response = await getUser();
+      console.log("response", response.data.items);
+      setUser(response.data.items);
+      console.log("object, re", response.data.items);
+    } catch (error) {
+      console.error(error?.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div>
       <div className="text-3xl sm:text-5xl font-semibold sm:leading-[4rem] text-primary text-center mt-10 mb-8">
@@ -190,7 +194,7 @@ const ManagementPage = () => {
       <DialogConfirm
         open={open}
         onOpenChange={handleOpenChange}
-        dialogDelete={dialogDelete}
+        dataPost={dialogDelete}
         handleDelete={handleDelete}
       />
       <Dialog open={openRole} onOpenChange={handleOpenRole}>

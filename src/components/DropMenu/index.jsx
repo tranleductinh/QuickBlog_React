@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 export function DropMenu({ theme, role, handleLogout }) {
   return (
     <DropdownMenu
-      className={`bg-background hover:bg-accent border border-input ${
+      className={`bg-background hover:bg-accent border border-input  ${
         theme === "dark" ? "bg-input/30 hover:bg-accent/50" : ""
       }`}
     >
@@ -41,7 +41,7 @@ export function DropMenu({ theme, role, handleLogout }) {
           </svg>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[160px] p-2" align="end">
+      <DropdownMenuContent className="w-full p-2" align="end">
         {role ? (
           <div>
             <Link

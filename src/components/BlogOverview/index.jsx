@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import loading from "../../assets/loading.json";
 import YoutubeFresh from "../Loaders/YoutubeFresh";
 import he from "he";
+import { cleanHtml } from "@/until/cleanHtml";
 
 const BlogOverview = ({ data, notFound }) => {
   if (notFound) {
@@ -41,7 +42,7 @@ const BlogOverview = ({ data, notFound }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
           {data.map((item) => (
             <div>
-              <Link to={`/blog-detail/${item._id}`} className="grid h-full">
+              <Link to={`/blog-details/${item._id}`} className="grid h-full">
                 <div className="shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02]">
                   <img
                     src={item.image}
@@ -59,10 +60,8 @@ const BlogOverview = ({ data, notFound }) => {
                     <h5 className="text-lg font-semibold mb-2 text-ellipsis whitespace-nowrap overflow-hidden">
                       {item.title}
                     </h5>
-                    <p className="text-foreground mb-2 text-xs overflow-hidden">
-                      {he.decode(
-                        item.content.replace(/<[^>]+>/g, "").slice(0, 110)
-                      ) + " ..."}
+                    <p className="text-foreground mb-2 text-xs overflow-hidden line-clamp-3">
+                      {he.decode(cleanHtml(item.content))}
                     </p>
                   </div>
                 </div>

@@ -25,7 +25,7 @@ function App() {
             </Route>
             <Route path="/" element={<Layout />}>
               <Route index element={<HomePage />} />
-              <Route path="/blog-detail/:id" element={<BlogViewPage />} />
+              <Route path="/blog-details/:id" element={<BlogViewPage />} />
               <Route path="/my-post" element={<MyPostPage />} />
               <Route
                 path="/user-management"
@@ -35,7 +35,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path="/create-blog" element={<CreateBlogPage />} />
+              <Route
+                path="/create-blog"
+                element={
+                  <ProtectedRoute role={["admin", "user"]}>
+                    <CreateBlogPage />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
           </Routes>
         </AuthContextProvider>

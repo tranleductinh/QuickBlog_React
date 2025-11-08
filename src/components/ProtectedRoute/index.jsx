@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children, role: requiredRole }) => {
     toast.error("Vui lòng đăng nhập");
     return <Navigate to="/login" />;
   }
-  if (role !== requiredRole) {
+  if (!requiredRole.includes(userInfo.user.role)) {
     toast.error("Bạn không có quyền truy cập");
     return <Navigate to="/" />;
   }

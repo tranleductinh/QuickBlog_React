@@ -7,17 +7,17 @@ const BlogViewPage = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState({});
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        const response = await getDetails(id);
-        console.log(response);
-        setBlog(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetch();
   }, []);
+  const fetch = async () => {
+    try {
+      const response = await getDetails(id);
+      console.log(response);
+      setBlog(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   console.log("blog", blog);
   return (
     <div>

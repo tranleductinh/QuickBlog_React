@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 export function DialogConfirm({
   open,
   onOpenChange,
-  dialogDelete,
+  dataPost,
   handleDelete,
 }) {
   return (
@@ -24,7 +24,7 @@ export function DialogConfirm({
         <DialogContent className="sm:max-w-lg p-6">
           <DialogHeader>
             <h2 className="!text-lg !leading-0 !font-semibold text-red-600">
-              Confirm delete "{dialogDelete.title}"
+              Confirm delete "{dataPost.title}"
             </h2>
             <p className="text-sm text-gray-500">
               This action cannot be undone. Are you sure you want to delete?
@@ -37,7 +37,7 @@ export function DialogConfirm({
               </Button>
             </DialogClose>
             <Button
-              onClick={() => handleDelete(dialogDelete.id)}
+              onClick={() => handleDelete(dataPost.id)}
               className="rounded-xl bg-red-600 hover:text-accent-foreground hover:bg-red-700 border"
             >
               Delete

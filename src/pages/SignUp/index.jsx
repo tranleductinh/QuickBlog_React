@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import AnimatedWave from "../../components/lightswind/animated-wave";
 import AuthCard from "@/components/AuthCard";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import AuthContext from "@/contexts/authContext";
 
 const SignUp = () => {
@@ -17,7 +16,6 @@ const SignUp = () => {
       setLoading(true);
       const response = await signUpUser(email, username, password);
       console.log(response);
-      
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.message);
