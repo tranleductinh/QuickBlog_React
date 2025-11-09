@@ -20,5 +20,18 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
+api.interceptors.response.use(
+  (response) => response, // Truyền qua phản hồi thành công
+  (error) => {
+    if (window.location.href.includes("/login")) {
+      return Promise.reject(error);
+    }
+    if (error.response?.status === 401) {
+      // Kiểm tra 401
+      localStorage.removeItem("userInfo"); // Xóa token không hợp lệ
+      window.location.href = "/login"; // Chuyển hướng đến đăng nhập
+    }
+    return Promise.reject(error); // Truyền lỗi khác
+  }
+);
 export default api;
