@@ -44,7 +44,9 @@ const ManagementPage = () => {
       setUser(user.filter((item) => item._id !== id));
       toast.success("Xóa thành công");
     } catch (error) {
-      console.error(error);
+      console.log("error",error)
+      toast.error(error?.response?.data?.message);
+      fetch();
     }
   };
   const handleOpenRole = (id) => {
