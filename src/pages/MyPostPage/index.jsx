@@ -19,6 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cleanHtml } from "@/until/cleanHtml";
+import he from "he";
 
 const MyPostPage = () => {
   const [loading, setLoading] = useState(false);
@@ -113,7 +114,7 @@ const MyPostPage = () => {
                 post.map((item) => (
                   <TableRow>
                     <TableCell>{item.title}</TableCell>
-                    <TableCell className="overflow-hidden max-w-[20px] text-ellipsis whitespace-nowrap">{cleanHtml(item.content)} ...</TableCell>
+                    <TableCell className="overflow-hidden max-w-[20px] text-ellipsis whitespace-nowrap">{he.decode(cleanHtml(item.content))} ...</TableCell>
                     <TableCell className="text-left">
                       <div className="flex items-center gap-2">
                         <Tooltip>

@@ -1,4 +1,3 @@
-import React, { useRef, useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Editor } from "@tinymce/tinymce-react";
@@ -106,7 +105,7 @@ const CreateBlog = ({
             <Input
               value={tagValue}
               onKeyDown={(e) => e.key === "Enter" && handleCreateTag()}
-              onChange={(e) => setTagValue(e.target.value)}
+              onChange={(e) => setTagValue(e.target.value.trim())}
               placeholder="Enter blog title"
             ></Input>
             <Button onClick={() => handleCreateTag()}>Add Tag</Button>
